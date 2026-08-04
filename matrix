@@ -1,0 +1,67 @@
+#Mappinglocationnamestoindicesformatrixrepresentation locations =
+['A', 'B', 'C', 'D']
+location_index={name:idx foridx,namein enumerate(locations)}
+#Adjacencymatrix
+adj_matrix = [
+#AB C D
+[0, 1,1, 0], #A
+[1, 0,0, 1], # B
+[1, 0,0, 1], # C
+]
+[0, 1,1, 0] # D
+#DepthFirstSearch(DFS)usingadjacencymatrix def
+dfs_matrix(start):
+visited=[False]*len(locations)
+result = []
+def dfs(node):
+visited[node]=True
+result.append(locations[node])
+forneighbor in range(len(adj_matrix)):
+ifadj_matrix[node][neighbor]==1andnotvisited[neighbor]:
+dfs(neighbor)
+dfs(location_index[start])
+return result
+#Adjacencylist adj_list
+= {
+'A':['B', 'C'],
+'B':['A','D'],
+'C':['A','D'],
+'D':['B', 'C']
+}
+#BreadthFirstSearch(BFS)usingadjacencylist def
+bfs_list(start):
+visited=set()
+queue=deque([start])
+result = []
+whilequeue:
+node=queue.popleft() if
+node not in visited:
+visited.add(node)
+result.append(node)
+forneighbor in adj_list[node]:
+if neighbor not in visited:
+queue.append(neighbor)
+returnresult
+#Menu-drivenprogram def
+menu():
+print("\n=====Menu=====")
+print("1. DFS Traversal")
+print("2. BFS Traversal")
+print("3. Exit")
+#Mainloop
+while True:
+menu()
+choice=input("Enteryourchoice: ")
+if choice == '1':
+start_location='A'
+dfs_result=dfs_matrix(start_location)
+print("DFSTraversal(usingadjacencymatrix):",dfs_result)
+elif choice == '2':
+start_location='A'
+bfs_result=bfs_list(start_location)
+print("BFSTraversal(usingadjacencylist):",bfs_result)
+elif choice == '3':
+print("Exitingprogram...")
+break
+else:
+print("Invalidchoice!Pleasetry again.")
